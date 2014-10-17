@@ -1,36 +1,18 @@
-/*
-#include "mbed.h"
-#include "USBSerial.h"
- 
-//Virtual serial port over USB
-USBSerial serial;
- 
-int main(void) {
- 
-    while(1)
-    {
-        serial.printf("I am a virtual serial port!\r\n");
-        wait(0.005);
-    }
-}
-*/
-///*
 #include "mbed.h"
 //#define isuse_USB_SERIAL
 
 #ifdef isuse_USB_SERIAL
 #include "USBSerial.h"
 USBSerial pc;
-#else 
+#else
 Serial pc(USBTX,USBRX);
 #endif
 I2C dev1(p9,p10);
-I2C dev2(p9,p10);
+I2C dev2(p28,p27);
 //I2C dev3(A5,A4);
 //I2C dev4(A5,A4);
 I2C* dev=&dev1;
 BusOut bus(LED1,LED2,LED3,LED4);
-//InterruptIn adint(D9);
 //DigitalOut led1(LED1);
 //DigitalOut led2(LED2);
 //DigitalOut led3(LED3);
@@ -38,25 +20,21 @@ BusOut bus(LED1,LED2,LED3,LED4);
 
 //Table 3. ASCII commands supported by SC18IM700
 //ASCII command Hex value Command function
-//S 0x53 I2C-bus START
-//P 0x50 I2C-bus STOP
-//R 0x52 read SC18IM700 internal register
-//W 0x57 write to SC18IM700 internal register
-//I 0x49 read GPIO port
-//O 0x4F write to GPIO port
-//Z 0x5A power down
-void adcomplete()
-{
-}
+//[X] S 0x53 I2C-bus START
+//[X] P 0x50 I2C-bus STOP
+//[_] R 0x52 read SC18IM700 internal register
+//[_] W 0x57 write to SC18IM700 internal register
+//[_] I 0x49 read GPIO port
+//[_] O 0x4F write to GPIO port
+//[_] Z 0x5A power down
 
 int main()
 {
 #ifndef isuse_USB_SERIAL
     pc.baud(115200);
 #endif
-//    adc.baud(38400);
     dev1.frequency(100000);//100k
-//    adint.fall(&adcomplete);
+    dev2.frequency(100000);//100k
 
     int data=0x50;
     int ack=0;
@@ -71,15 +49,6 @@ int main()
         I2C2adr='2',
         I2C3adr='3',
     };
-//    uint8_t registers[]={0x80,0x90,};
-
-//    reg.start();
-//    reg.write(0xD0);
-//    reg.write(data);
-//
-//    reg.write(0xD0|0x01);
-//    data=reg.read(ack);
-//    reg.stop();
 //"C0P"
 //"S(0x80)(4)(0xDEADBEAF)P"
 //"C1P"
@@ -111,6 +80,7 @@ int main()
                         case I2C0adr:
                             bus=0x01;
 //                            pc.printf("ch0 is selected,");
+                            channel='0';
                             dev=&dev1;
                             break;
                         case I2C1adr:
@@ -194,9 +164,7 @@ int main()
                     break;
             }
         }
-//        pc.printf(send);
         i=0;
 
     }
 }
-//*/
