@@ -80,7 +80,7 @@ int main()
                             break;
                         case I2C3adr:
                             bus=0x08;
-//pc.printf("ch0 is not implemented,");
+//pc.printf("ch3 is not implemented,");
                             channel='0';
                             //dev=&dev4;
                             break;
