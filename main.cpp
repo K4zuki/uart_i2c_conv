@@ -1,5 +1,21 @@
+<<<<<<< 085beae13fa74cf6ba82492d6cb0b9b1af8ebfc9
 /** uart_i2c_conv for LPC824
 */
+=======
+#include "mbed.h"
+//#define isuse_USB_SERIAL
+
+#ifdef isuse_USB_SERIAL
+#include "USBSerial.h"
+USBSerial pc;
+#else
+Serial pc(USBTX,USBRX);
+#endif
+I2C dev1(p9,p10);
+I2C dev2(p28,p27);
+I2C* dev=&dev1;
+BusOut bus(LED1,LED2);
+>>>>>>> removed unused variables; fixed coding format; commented out unused code
 
 #include "mbed.h"
 #include "settings.h"
