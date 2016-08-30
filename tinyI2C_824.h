@@ -50,5 +50,3 @@ I2C dev1(I2C_SDA, I2C_SCL);//11,10 hard coded, 220 ohm pull-up
     DigitalInOut _GPIO06(P0_13); // D8
     DigitalInOut _GPIO07(P0_27); // D9
 #endif
-
-

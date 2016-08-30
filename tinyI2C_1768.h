@@ -40,5 +40,3 @@ DigitalInOut _GPIO14(p23);
 DigitalInOut _GPIO15(p24);
 DigitalInOut _GPIO16(p25);
 DigitalInOut _GPIO17(p26);
-
-

@@ -26,5 +26,3 @@ enum chipID_e {
 #include "tinyI2C_1768.h"
 
 #endif
-
-
