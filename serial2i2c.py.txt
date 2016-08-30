@@ -18,21 +18,21 @@ class serial2i2c(object):
     ser=0
     channel='0'
     address=0x80
-    
+
     def __init__(self,port='com1',baud='115200'):
         self.ser=serial.Serial(port,baudrate=baud,timeout=1)
-        
+
     def setChannel(self,channel=0):
         self.channel=channel
         self.ser.write("C"+str(self.channel)+"P")
         return (self.ser.readline().strip())
         pass
-        
+
     def read(self,address,length=1):
         self.ser.write("S"+chr(address|0x01)+chr(length)+"P")
         return(self.ser.readline().strip())
         pass
-        
+
     def write(self,address,data=0):
         data=self.convert_hex_to_ascii(data)
         length=len(data)
@@ -42,7 +42,7 @@ class serial2i2c(object):
 #                        +">"+str(length)+"B"+chr(data)+"P")
         return(self.ser.readline().strip())
         pass
-        
+
     def write_and_read(self,address,wdata=0,rlength=1):
         wdata=self.convert_hex_to_ascii(wdata)
         length=len(wdata)
@@ -56,26 +56,26 @@ class serial2i2c(object):
     def start(self):
         self.ser.write("S")
         pass
-        
+
     def stop(self):
         self.ser.write("P")
         pass
-    
+
     def convert_hex_to_ascii(self,h):
         chars_in_reverse = []
         while h != 0x0:
             chars_in_reverse.append(chr(h & 0xFF))
             h = h >> 8
-    
+
         chars_in_reverse.reverse()
         return ''.join(chars_in_reverse)
 
-        
+
 #    def send(self,data="Sx4hogeP"):
 #        self.ser.write(data)
 #        pass
-        
-        
+
+
 
 class MyParser(object):
     def __init__(self):
@@ -84,15 +84,15 @@ class MyParser(object):
 #        self.parser.add_argument('--port','-p', help='number or name of serial port', default='/dev/ttyACM0')
 #        self.parser.add_argument('--mon','-m', help='number or name of serial port', default='/dev/ttyACM0')
         self.parser.add_argument('--baud','-b', help='baudrate of serial port', default='115200')#460800
-        self.args=self.parser.parse_args(namespace=self)        
-      
+        self.args=self.parser.parse_args(namespace=self)
+
 if __name__=="__main__":
 #    parser.print_help()
     parser=MyParser()
 #    args=parser.parse_args()
 #    print args
 #    print args.port, args.baud
-    
+
     port=parser.args.port # port number, different in OSes
     baud=parser.args.baud
     dev=serial2i2c(port,baud)
@@ -147,4 +147,3 @@ if __name__=="__main__":
 #    while(ser.inWaiting()>0):
 #        print ser.readline()
 #    dev.ser.close()
-
