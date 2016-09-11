@@ -625,53 +625,53 @@ int main()
                   //                                        pc.printf("s%04X,",_data);
                   send[(j/2)+0] = 0xFF & (ack>>8);
                   send[(j/2)+1] = 0xFF & (ack>>0);
+                  }
+                  for(int j = length; j < (length+2*read); j += 4){
+                    ack = _spi.write(0xAAAA); //dummy data to write
+                    //                                        pc.printf("a%04X,",ack);
+                    send[(j/2)+0] = 0xFF & (ack>>8);
+                    send[(j/2)+1] = 0xFF & (ack>>0);
+                  }
+                  _cs.write(disabled);
                 }
-                for(int j = length; j < (length+2*read); j += 4){
-                  ack = _spi.write(0xAAAA); //dummy data to write
-                  //                                        pc.printf("a%04X,",ack);
-                  send[(j/2)+0] = 0xFF & (ack>>8);
-                  send[(j/2)+1] = 0xFF & (ack>>0);
-                }
-                _cs.write(disabled);
+                break;
               }
-              break;
-            }
             default:
             {
               pc.printf("this shold not happen %d\n\r",format);
               break;
             }
           }
-          //                        pc.printf("command E is for SPI transmission\n\r");
-          length = read + data;
-          i = (plength-1);
+            //                        pc.printf("command E is for SPI transmission\n\r");
+            length = read + data;
+            i = (plength-1);
+          }
+          break;
         }
-        break;
-      }
-      case 'Z':
-      {
-        s = false;
-        pc.printf("command Z is not implemented\n\r");
-        i=plength;
-        break;
-      }
-      case 'V':
-      {
-        s = false;
-        pc.printf("command V is not implemented\n\r");
-        i=plength;
-        break;
-      }
-      default:
-      {
-        s = false;
-        pc.printf("command %c is not implemented\n\r", recieve[i]);
-        i = plength;
-        break;
+        case 'Z':
+        {
+          s = false;
+          pc.printf("command Z is not implemented\n\r");
+          i=plength;
+          break;
+        }
+        case 'V':
+        {
+          s = false;
+          pc.printf("command V is not implemented\n\r");
+          i=plength;
+          break;
+        }
+        default:
+        {
+          s = false;
+          pc.printf("command %c is not implemented\n\r", recieve[i]);
+          i = plength;
+          break;
+        }
       }
     }
-  }
-  i = 0;
-  length = 0;
+    i = 0;
+    length = 0;
   }
 }
