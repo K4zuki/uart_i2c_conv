@@ -165,6 +165,7 @@ int main()
   while(1) {
     i = 0;
     length = 0;
+    s = false;
     while( true ) {
       read = pc.getc();
       recieve[i] = read;
