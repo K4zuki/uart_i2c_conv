@@ -597,12 +597,12 @@ int main()
                 for(int j = 0; j < length; j += 2){
                   _data = 0xff & ((recieve[i+5+j+0]<<4) | (recieve[i+5+j+1]&0x0F));
                   ack = _spi.write(_data);
-                  //                                    pc.printf("s%02X,",_data);
+                  // pc.printf("s%02X,",_data);
                   send[j/2] = ack;
                 }
                 for(int j = length; j < (length+2*read); j+=2){
                   ack = _spi.write(0xAA); //dummy data to write
-                  //                                    pc.printf("a%02X,",ack);
+                  // pc.printf("a%02X,",ack);
                   send[j/2] = ack;
                 }
                 _cs.write(disabled);
@@ -617,15 +617,15 @@ int main()
                 }else{
                   _cs.write(enabled);
                   for(int j = 0; j < length; j += 4){
-                    _data = 0xffff & (((recieve[i+5+j+0] & 0x0F)<<12)|
-                    ((recieve[i+5+j+1] & 0x0F)<<8 )|
-                    ((recieve[i+5+j+2] & 0x0F)<<4 )|
-                    ((recieve[i+5+j+3] & 0x0F)<<0 )
-                  );
-                  ack = _spi.write(_data);
-                  //                                        pc.printf("s%04X,",_data);
-                  send[(j/2)+0] = 0xFF & (ack>>8);
-                  send[(j/2)+1] = 0xFF & (ack>>0);
+                    _data = 0xffff &  (((recieve[i+5+j+0] & 0x0F)<<12)|
+                                      ((recieve[i+5+j+1] & 0x0F)<<8 )|
+                                      ((recieve[i+5+j+2] & 0x0F)<<4 )|
+                                      ((recieve[i+5+j+3] & 0x0F)<<0 )
+                    );
+                    ack = _spi.write(_data);
+                    // pc.printf("s%04X,",_data);
+                    send[(j/2)+0] = 0xFF & (ack>>8);
+                    send[(j/2)+1] = 0xFF & (ack>>0);
                   }
                   for(int j = length; j < (length+2*read); j += 4){
                     ack = _spi.write(0xAAAA); //dummy data to write
