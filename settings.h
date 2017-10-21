@@ -6,9 +6,9 @@ settings.h
 // #define isGPIO0 // unused(always enabled)
 
 enum chipID_e {
-    ID_LPC824 = '0',
-    ID_LPC1768 = '1',
-    ID_LPC11UXX = '2',
+  ID_LPC824 = '0',
+  ID_LPC1768 = '1',
+  ID_LPC11UXX = '2',
 };
 
 #if defined(TARGET_SSCI824) || defined(TARGET_LPC824)

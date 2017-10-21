@@ -4,9 +4,8 @@ tinyI2C_11U3x.h
 
 static const uint8_t chip_id = ID_LPC11UXX;
 
-#define isI2C1  // unused(always enabled)
-I2C dev1( P0_5, P0_4 );
-
+#define isI2C1 // unused(always enabled)
+I2C dev1(P0_5, P0_4);
 
 #undef isI2C2
 #undef isI2C3
@@ -21,7 +20,7 @@ USBSerial pc;
 #define isHWSPI
 #undef isSWSPI
 SPI _spi(P0_9, P0_8, P0_10); // mosi, miso, sclk
-DigitalOut _cs(P0_7); // CS
+DigitalOut _cs(P0_7);        // CS
 
 #define isGPIO0 // unused(always enabled)
 DigitalInOut _GPIO00(P0_22);
@@ -40,5 +39,5 @@ DigitalInOut _GPIO12(P0_18);
 DigitalInOut _GPIO13(P0_19);
 DigitalInOut _GPIO14(P1_19);
 DigitalInOut _GPIO15(P0_20);
-DigitalInOut _GPIO16(P0_2 );
+DigitalInOut _GPIO16(P0_2);
 DigitalInOut _GPIO17(P0_21);
